@@ -1,35 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//single element
-const heading = React.createElement(
-  "h1", //tag
-  { id: "heading", xyz: "abc" }, //attributes to element
-  "Hello World from REACT" //children
-); //heading is not html h1 tag it is React object, in console we'll get heading as React object
+//JSX
+const jsxHeading = <h1 id="heading">Heading using JSX</h1>;
+console.log(jsxHeading);
 
-/*        //HOW TO CREATE THIS STRUCTURE IN JS
- *  <div id = 'parent'>
-        <div id = 'child'>
-            <h1>Hello h1</h1>
-            <h1>Hello h2</h1>
-        </div>
-    </div>  * 
- * 
- */
+const Compo = () => <h2>Component</h2>;
 
-const parent = React.createElement(
-  "div",
-  { id: "parent" },
-  React.createElement("div", { id: "child" }, [
-    ,
-    React.createElement("h1", {}, "Hello h1, reema here"),
-    React.createElement("h2", {}, "Hello h2"),
-  ])
+//Component
+const HeadingComponent1 = () => (
+  <div id="container">
+    <Compo></Compo>
+    {"I am JS code" + (10 + 90) + "%"}
+    <h1>Functional Component1</h1>;
+  </div>
 );
 
-//Above code is very messy therefore we have JSX
+//Component composition
+const HeadingComponent2 = () => (
+  <div className="heading">
+    {jsxHeading}
+    {HeadingComponent1()}
+    <h1>Functional Component2</h1>;
+  </div>
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(heading);
-root.render(parent); //render fun take the React obj, convert it into heading tag & put it into the DOM
+root.render(<HeadingComponent2 />);
