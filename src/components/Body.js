@@ -15,6 +15,7 @@ const Body = () => {
   console.log("Body Rendered");
 
   useEffect(() => {
+    console.log("body useEffect");
     fetchData();
   }, []);
 
