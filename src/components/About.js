@@ -1,32 +1,38 @@
 import User from "./User";
 import UserClass from "./UserClass";
 import { Component } from "react";
+import UserContext from "../utils/userContext";
 
 class About extends Component {
   constructor(props) {
     super(props);
-    console.log("Parent constructor");
+
+    //console.log("Parent Constructor");
   }
 
   componentDidMount() {
-    console.log("Parent component did mount");
+    //console.log("Parent Component Did Mount");
   }
 
   render() {
-    console.log("Parent render");
+    //console.log("Parent Render");
+
     return (
       <div>
-        <h1>About</h1>
-        {/* <User name="Reema (functional component)" location="Nalagarh" /> */}
-        <UserClass name="Reema (class component)" location="Nalagarh" />
-        <UserClass name="Reeva (class component)" location="Pune" />
+        <h1>About Class Component</h1>
+        <div>
+          LoggedIn User
+          <UserContext.Consumer>
+            {({ loggedInUser }) => (
+              <h1 className="text-xl font-bold">{loggedInUser}</h1>
+            )}
+          </UserContext.Consumer>
+        </div>
+        <h2>This is Namaste React Web Series</h2>
+        <UserClass name={"First"} location={"Dehradun Class"} />
       </div>
     );
   }
 }
 
 export default About;
-// Parent constructor -> Parent render -> Reema constructor -> Reema render -> Reeva constructor -> Reeva render ->
-// Reema component did mount -> Reeva component did mount -> Parent component did mount
-// This is because of optimization done by React i.e commit of both the components are patched.
-// First the render phase (constructor & render) is patched together of same class & the commit phase (componentDidMount)
